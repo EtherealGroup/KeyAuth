@@ -34,8 +34,8 @@ async def redeem(interaction: discord.Interaction, key: str):
     await interaction.response.send_message("Your product key is **INVALID** ❌")
   
 async def searchKeys(key):
-    key = key.strip()
-    with open("keys.txt", "r") as f:
+    key = key.strip() # Removes any whitespace characters.
+    with open("keys.txt", "r") as f: # keys.txt is the text file in which your keys are stored.
         for x in f:
             if x.strip() == key:
                 return True
