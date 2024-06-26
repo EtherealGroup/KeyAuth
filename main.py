@@ -29,7 +29,7 @@ async def on_ready():
 async def redeem(interaction: discord.Interaction, key: str):
    isValid = await searchKeys(key)
    if (isValid):
-    await interaction.response.send_message("Your product key is **VALID** ✅")
+    await interaction.response.send_message("Your product key is **VALID** ✅\nHere's a cookie: 🍪")
    else:
     await interaction.response.send_message("Your product key is **INVALID** ❌")
   
