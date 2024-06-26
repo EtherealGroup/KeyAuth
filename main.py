@@ -24,7 +24,22 @@ async def on_ready():
   except Exception as e:
     print(e)
 
-
+@client.tree.command(name="redeem", description="Redeems product key")
+@app_commands.describe(key = "Your product key")
+async def redeem(interaction: discord.Interaction, key: str):
+   isValid = await searchKeys(key)
+   if (isValid):
+    await interaction.response.send_message("Your product key is **VALID** ✅")
+   else:
+    await interaction.response.send_message("Your product key is **INVALID** ❌")
+  
+async def searchKeys(key):
+    key = key.strip()
+    with open("keys.txt", "r") as f:
+        for x in f:
+            if x.strip() == key:
+                return True
+    return False
 
 
 client.run(TOKEN)
