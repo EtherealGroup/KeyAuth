@@ -24,6 +24,12 @@ async def on_ready():
   except Exception as e:
     print(e)
 
+class InfoMenu(discord.ui.View):
+  def __init__(self):
+    super().__init__()
+    self.value = None
+    self.add_item(discord.ui.Button(label="Source Code", url = "https://github.com/EtherealGroup/KeyAuth", emoji="<githubwhite:1252766253777420349>"))
+
 @client.tree.command(name="redeem", description="Redeems product key")
 @app_commands.describe(key = "Your product key")
 async def redeem(interaction: discord.Interaction, key: str):
@@ -32,6 +38,16 @@ async def redeem(interaction: discord.Interaction, key: str):
     await interaction.response.send_message("Your product key is **VALID** ✅\nHere's a cookie: 🍪")
    else:
     await interaction.response.send_message("Your product key is **INVALID** ❌")
+
+@client.tree.command(name = "info", description = "Information about the bot, and the source code")
+async def info(interaction: discord.Interaction):
+  view = InfoMenu()
+  infoEmbed = discord.Embed(title="Information", color=0x777777)
+  infoEmbed.add_field(name="About KeyAuth", value = "KeyAuth is a framework for seamlessly authenticating various types of keys.", inline = False)
+  infoEmbed.add_field(name="Ethereal Group", value = "We are Ethereal Group, the developers of this discord bot. We're focused on making open-source and high quality discord bots", inline = False)
+  infoEmbed.set_thumbnail(url = "https://avatars.githubusercontent.com/u/173092938?s=200&v=4")
+  infoEmbed.set_footer(text=f"Requested by {interaction.user.name}", icon_url=interaction.user.display_avatar)
+  await interaction.response.send_message(embed=infoEmbed, view=view)
   
 async def searchKeys(key):
     key = key.strip() # Removes any whitespace characters.
