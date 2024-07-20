@@ -35,9 +35,9 @@ class InfoMenu(discord.ui.View):
 async def redeem(interaction: discord.Interaction, key: str):
    isValid = await searchKeys(key)
    if (isValid):
-    await interaction.response.send_message("Your product key is **VALID** ✅\nHere's a cookie: 🍪")
+    await interaction.response.send_message("Your product key is **VALID** ✅\nHere's a cookie: 🍪", ephemeral = True)
    else:
-    await interaction.response.send_message("Your product key is **INVALID** ❌")
+    await interaction.response.send_message("Your product key is **INVALID** ❌", ephemeral = True)
 
 @client.tree.command(name = "info", description = "Information about the bot, and the source code")
 async def info(interaction: discord.Interaction):
